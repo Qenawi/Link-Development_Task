@@ -8,7 +8,7 @@ import tjw.link_task.dagger.AppComponent
 import tjw.link_task.dagger.modules.AppModule
 import tjw.link_task.dagger.DaggerAppComponent
 
-class GoPlusApplication:Application()
+class LikTaskApplication:Application()
 {
     override fun onCreate() {
         super.onCreate()

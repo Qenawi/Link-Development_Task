@@ -6,7 +6,8 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import tjw.link_task.dagger.modules.AppFeatures
 import tjw.link_task.dagger.modules.AppModule
-import tjw.link_task.domain.GoPlusApplication
+import tjw.link_task.domain.LikTaskApplication
+import tjw.link_task.ui.home.FragmentHome
 import javax.inject.Singleton
 
 
@@ -29,5 +30,6 @@ interface AppComponent {
         fun appModule(module: AppModule): Builder
         fun build(): AppComponent
     }
-    fun inject(app: GoPlusApplication)
+    fun inject(app: LikTaskApplication)
+    fun inject(app: FragmentHome)
 }

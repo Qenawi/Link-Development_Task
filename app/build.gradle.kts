@@ -50,5 +50,9 @@ dependencies {
     implementation(Libraries.Timber)
     implementation(Libraries.Retrofit.retrofit)
     implementation(Libraries.Retrofit.gsonConverter)
+    implementation(Libraries.UI.materialComponent)
+    implementation(Libraries.Kotlin.reflect)
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
 }
 

@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import kotlinx.android.synthetic.main.activity_with_tool_bar.view.*
+import tjw.link_task.R
 import tjw.link_task.extentions.cHideSoftKeyboard
 import tjw.link_task.extentions.inTransaction
 import tjw.link_task.extentions.observe
@@ -15,7 +17,7 @@ import tjw.link_task.extentions.observe
 abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     abstract fun layoutId(): Int
     lateinit var binding: B
-    private val fragHolderId = 0
+    private val fragHolderId = R.id.l_fragment_holder
     val toolbarTitle = MutableLiveData<String>()
     val callBack = MutableLiveData<Boolean>()
     override fun onCreate(savedInstanceState: Bundle?) {

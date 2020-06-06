@@ -3,6 +3,8 @@ package tjw.link_task.extentions
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.Drawable
+import tjw.link_task.domain.data.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -16,6 +18,7 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 fun Activity.cHideSoftKeyboard() {
     val focusedView = currentFocus
@@ -89,12 +92,22 @@ fun View.mEnable(boolean: Boolean?) =
 fun View.mProgress(boolean: Boolean?) {
     cVisible(boolean)
 }
+@SuppressLint("SetTextI18n")
+@BindingAdapter(
+    value = ["safe_text", "decimal_format", "before_text", "after_text"],
+    requireAll = false
+)
+fun TextView.mText(any: Any?, boolean: Boolean?, before_text: Int?, after_text: Int?) =
+    any?.let { sText ->
+        text = if (boolean == true) (sText as Int).safeDecimalFormat() else sText.toString()
+        before_text?.let { aa ->
+            text = "${getString_(aa)} ${text.toString()}"
+        }
+        after_text?.let { aa ->
+            text = "${text.toString()} ${getString_(aa)} "
+        }
+    }
 
-@BindingAdapter(value =  ["safe_text","decimal_format"],requireAll = false)
-fun TextView.mText(any: Any?, boolean: Boolean?) = any?.let {
-        sText ->
-    text = if(boolean==true)(sText as Int).safeDecimalFormat() else sText.toString()
-}
 fun Int?.safeDecimalFormat():String{
     val df = DecimalFormat("#,###")
     df.roundingMode = RoundingMode.CEILING
@@ -112,7 +125,19 @@ fun delay250(block: (Any) -> Unit = {}) {
     }
 }
 
-
+@SuppressLint("SetTextI18n")
+@BindingAdapter("safe_date")
+fun TextView.mSafeDate(date:String?)
+{
+    val formatDate= try{ convertDateFromFormatToOther(date?:"") }catch (e:Exception) {null}
+    this.text=formatDate?:"not dated"
+}
+private fun convertDateFromFormatToOther(fDate:String):String?
+{
+    val parser =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ROOT).parse(fDate)
+    val formatter = SimpleDateFormat("MMM dd yyyy",Locale.ROOT)
+    return parser?.let { date -> formatter.format(date) }
+}
 @SuppressLint("SimpleDateFormat")
 @BindingAdapter("milliSecondData")
 fun TextView.msData(msDate: String?)
@@ -132,3 +157,27 @@ fun View.getString_(resource_id: Int): String = try {
 } catch (e: Exception) {
     "-"
 }
+
+fun View.getImg_(resource_id: Int): Drawable = try {
+    this.context.resources.getDrawable(resource_id)
+} catch (e: Exception) {
+    this.context.resources.getDrawable(R.drawable.wishlist)
+}
+
+
+@BindingAdapter("from_res_id")
+fun View.fromDate(int: Int?)
+{
+int?.let {id->
+when(this)
+{
+ is TextView -> this.text=this.getString_(id)
+ is ImageView->this.setImageDrawable(this.getImg_(id))
+}
+}}
+@BindingAdapter("menu_selection")
+fun View.menuSelection(res:MenuItem?)=cVisible(res?.selected)
+
+
+
+

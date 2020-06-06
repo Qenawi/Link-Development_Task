@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
+import dagger.multibindings.IntoMap
+import tjw.link_task.ui.home.HomeViewModel
 import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
@@ -35,12 +37,12 @@ class ViewModelFactory
 abstract class ViewModelFactoryBindingModule {
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-/*
+
+
     @Binds
     @IntoMap
-    @ViewModelKey(MapViewModel::class)
-    abstract fun bindMapModel(vm: MapViewModel): ViewModel
-  */
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindHomeViewModel(vm: HomeViewModel): ViewModel
 
     //Todo Add more ViewModels here
 }

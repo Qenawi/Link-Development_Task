@@ -7,6 +7,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import tjw.go_plus_meeting.domain.network.Failure
+import tjw.link_task.domain.data.Article
+import tjw.link_task.ui.home.HomeAdapter
 
 open class BaseViewModel<T>(
     application: Application,

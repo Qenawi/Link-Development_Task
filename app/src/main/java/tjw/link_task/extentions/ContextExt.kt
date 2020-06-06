@@ -9,6 +9,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import com.google.firebase.iid.FirebaseInstanceId
@@ -47,12 +48,16 @@ inline fun <reified T : Fragment> mAddFragment(addToBackStack: Boolean?=null,act
 inline fun <reified T : Application> AndroidViewModel.getString(int: Int): String =
     this.getApplication<T>().getString(int)
 
-//fun Context?.getPrefs(): SharedPreference? {
- //   return this?.let { ctx-> SharedPreference(ctx) }
-//}
 
 
 @SuppressLint("HardwareIds")
 fun  Context?.getDeviceUniqueFootPrint():String=try {
     Settings.Secure.getString(this?.contentResolver, Settings.Secure.ANDROID_ID)
 }catch (e:Exception){ FirebaseInstanceId.getInstance().id}
+
+
+fun Context?.toast(st:String?)
+        =
+    this?.let {ctx->
+        Toast.makeText(ctx,st, Toast.LENGTH_SHORT).show()
+    }

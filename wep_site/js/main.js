@@ -5,3 +5,8 @@ jQuery(document).ready(function( $ ) {
   });
   
 });
+
+function myFunction() {
+  alert("dd")
+}
+
