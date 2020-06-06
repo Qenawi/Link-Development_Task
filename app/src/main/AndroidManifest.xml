@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="tjw.go_plus_meeting">
+    package="tjw.link_task">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".domain.GoPlusApplication"
+        android:name="tjw.link_task.domain.GoPlusApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name="tjw.go_plus_meeting.MainActivity">
+        <activity android:name="tjw.link_task.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
