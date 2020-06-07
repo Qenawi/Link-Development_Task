@@ -10,6 +10,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.*
@@ -37,7 +39,7 @@ fun cLoadImageFromUrl(view: ImageView, url: String?, cover: Boolean? = false)
             error(R.color.colorAccent).placeholder(R.color.colorAccent)
         } else {
             //  this.placeholder(R.drawable.user)
-            error(R.color.colorPrimary).placeholder(R.color.colorPrimary)
+            error(R.drawable.logo).placeholder(R.drawable.loading)
         }
     }
     Glide.with(view.context).applyDefaultRequestOptions(requestOptions).load("$url")
@@ -124,7 +126,13 @@ fun delay250(block: (Any) -> Unit = {}) {
         { block(Any()) }
     }
 }
-
+fun delay150(block: (Any) -> Unit = {}) {
+    GlobalScope.launch {
+        delay(150)
+        withContext(Dispatchers.Main)
+        { block(Any()) }
+    }
+}
 @SuppressLint("SetTextI18n")
 @BindingAdapter("safe_date")
 fun TextView.mSafeDate(date:String?)
@@ -147,7 +155,7 @@ fun TextView.msData(msDate: String?)
 @BindingAdapter("go_back", "title", requireAll = false)
 fun View.handle(data: MutableLiveData<Boolean>?, name: MutableLiveData<String>?) {
     when (name?.value) {
-        getString_(R.string.app_name) ,getString_(R.string.app_name),getString_(R.string.app_name)-> this.cVisible(false)
+        getString_(R.string.home) -> this.cVisible(false)
         else -> this.cVisible(true)
     }
     this.setOnClickListener { data?.postValue(true) }
@@ -178,6 +186,10 @@ when(this)
 @BindingAdapter("menu_selection")
 fun View.menuSelection(res:MenuItem?)=cVisible(res?.selected)
 
+
+fun RecyclerView.mLinearLayoutManager() {
+    this.layoutManager = LinearLayoutManager(this.context)
+}
 
 
 

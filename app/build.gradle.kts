@@ -46,7 +46,7 @@ dependencies {
     implementation(Libraries.Glide.library)
     kapt(Libraries.Glide.compiler)
     implementation(Libraries.TestLibs.junit)
-    implementation(Libraries.FireBase.messeging)
+    //implementation(Libraries.FireBase.messeging)
     implementation(Libraries.Timber)
     implementation(Libraries.Retrofit.retrofit)
     implementation(Libraries.Retrofit.gsonConverter)

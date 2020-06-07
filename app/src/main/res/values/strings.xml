@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">New-Kts</string>
+    <string name="app_name">Link Task</string>
     <string name="AppPrefs_MainKey">GoPlusSharedKey</string>
     <string name="explore">Explore</string>
     <string name="live_chat">Live Chat</string>
@@ -15,4 +15,6 @@
     <string name="action_settings">Settings</string>
     <string name="menu_magazine">E-Magazine</string>
     <string name="auther_by">By</string>
+    <string name="home">Home</string>
+    <string name="open_wepsite">Open WepSite</string>
 </resources>

@@ -9,10 +9,14 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor (app: Application, val useCase: HomeUseCase) :
     BaseViewModel<HomeUseCase>(app, useCase) {
-    private val mLoading = MutableLiveData<Boolean>()
+     val mLoading = MutableLiveData<Boolean>()
     val mResult = MutableLiveData<ArrayList<Article>>()
     fun doWork() {
         mLoading.value = true
+        useCase.doWork(HomeUseCase.Params()){art->
+            art.either(::handleHomeFail,::handleHomeSucess)
+
+        }
     }
     private fun handleHomeSucess(data: ArrayList<Article>) {
         mLoading.value = false

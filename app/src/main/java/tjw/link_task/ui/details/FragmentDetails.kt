@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import tjw.link_task.R
 import tjw.link_task.databinding.FragmentDetailBinding
+import tjw.link_task.domain.base.BaseActivity
 import tjw.link_task.domain.base.BaseFragment
 import tjw.link_task.domain.data.Article
 
@@ -35,12 +36,15 @@ class FragmentDetails : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         (binding as FragmentDetailBinding).data=data
         return  binding.root
     }
     override fun onResume()
     {
         super.onResume()
+        (activity as BaseActivity<*>?)?.toolbarTitle?.postValue(getString(R.string.home))
+
     }
     private fun navigate(){}
 }

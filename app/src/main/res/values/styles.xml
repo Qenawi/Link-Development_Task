@@ -22,7 +22,7 @@
         <item name="android:textColor">@color/White</item>
         <item name="rippleColor">@color/LightGrey</item>
         <item name="cornerRadius">5dp</item>
-        <item name="backgroundTint">@color/Orange</item>
+        <item name="backgroundTint">@color/Black</item>
     </style>
 
     <dimen name="app_bar_height">180dp</dimen>

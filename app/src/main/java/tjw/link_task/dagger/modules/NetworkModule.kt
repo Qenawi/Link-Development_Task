@@ -22,7 +22,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     companion object {
-        private val BASE_URL = "https://newsapi.org/v1/articles/"
+        private val BASE_URL = "https://newsapi.org/v1/"
         const val NetworkRequestTag="NetworkRequestTag"
     }
 

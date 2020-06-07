@@ -12,7 +12,6 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
-import com.google.firebase.iid.FirebaseInstanceId
 import tjw.link_task.domain.base.BaseActivity
 
 val Context.networkInfo: NetworkInfo?
@@ -49,12 +48,12 @@ inline fun <reified T : Application> AndroidViewModel.getString(int: Int): Strin
     this.getApplication<T>().getString(int)
 
 
-
+/*
 @SuppressLint("HardwareIds")
 fun  Context?.getDeviceUniqueFootPrint():String=try {
     Settings.Secure.getString(this?.contentResolver, Settings.Secure.ANDROID_ID)
 }catch (e:Exception){ FirebaseInstanceId.getInstance().id}
-
+*/
 
 fun Context?.toast(st:String?)
         =

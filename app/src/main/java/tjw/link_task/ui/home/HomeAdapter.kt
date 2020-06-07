@@ -9,8 +9,9 @@ import tjw.link_task.domain.base.BaseViewModel
 import tjw.link_task.domain.base.autoNotify
 import tjw.link_task.domain.base.binding
 import tjw.link_task.domain.data.Article
+import javax.security.auth.callback.Callback
 
-class HomeAdapter(private var adapterData: ArrayList<Article>) :
+class HomeAdapter(private var adapterData: ArrayList<Article>,val callback: (Article)->Unit={}) :
     BaseDataBindingAdapter<ArticleItemBinding, Article>() {
     private lateinit var bind: ArticleItemBinding
     override fun layoutId() = R.layout.article_item
@@ -20,6 +21,9 @@ class HomeAdapter(private var adapterData: ArrayList<Article>) :
     ): ArticleViewHolder {
         bind = binding(parent)
         val viewHolder = ArticleViewHolder(bind)
+        viewHolder.itemView.setOnClickListener {
+        callback(adapterData.get(viewHolder.adapterPosition))
+        }
         return viewHolder
     }
 
@@ -36,14 +40,19 @@ class HomeAdapter(private var adapterData: ArrayList<Article>) :
     }
 
     fun update(data: ArrayList<Article>) {
+        /*
         print("After ${adapterData.size}")
         autoNotify(adapterData, data, ::campare)
         print("Before ${adapterData.size}")
-
+       */
+        adapterData.clear()
+        adapterData.addAll(data)
+        notifyDataSetChanged()
     }
 
     private fun campare(article: Article, article1: Article): Boolean
     {
+        article
         return article.url.equals(article1.url)
     }
     //todo Searhc Bu name and date

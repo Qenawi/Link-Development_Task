@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.drawer_layout.*
+import kotlinx.android.synthetic.main.main_fragment_content.*
 import tjw.link_task.R
-import tjw.link_task.dagger.ViewModelFactory
-import tjw.link_task.dagger.ViewModelFactory_Factory
+import tjw.link_task.databinding.FragmentHomeBinding
 import tjw.link_task.domain.LikTaskApplication
+import tjw.link_task.domain.base.BaseActivity
 import tjw.link_task.domain.base.BaseFragment
-import tjw.link_task.extentions.observe
-import tjw.link_task.extentions.toast
-import tjw.link_task.extentions.viewModel
+import tjw.link_task.domain.data.Article
+import tjw.link_task.domain.data.getMenu
+import tjw.link_task.extentions.*
+import tjw.link_task.ui.details.FragmentDetails
 import javax.inject.Inject
 
 class FragmentHome:BaseFragment()
@@ -24,15 +26,20 @@ class FragmentHome:BaseFragment()
     lateinit var viewModel:HomeViewModel
     override fun layoutId()= R.layout.fragment_home
     override fun view_life_cycle_owner()=viewLifecycleOwner
-
+    private var menuAdapter=MenuAdapter(getMenu())
+    private var newsAdapter=HomeAdapter(ArrayList(),::navigate)
     companion object{
      fun  newInstance()=FragmentHome()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LikTaskApplication.appComponent.inject(this)
-        viewModel=viewModel(factory){
-          observe(toastMutable){fail-> fail?.let {ff-> context.toast(ff.f_causeSt)}}
+         LikTaskApplication.appComponent.inject(this)
+         viewModel=viewModel(factory){
+           doWork()
+           observe(toastMutable){fail-> fail?.let {ff->context.toast(ff.f_causeSt)}}
+           observe(mResult){result-> result?.let {
+                   rr->newsAdapter.update(rr)
+           }}
         }
     }
 
@@ -41,10 +48,27 @@ class FragmentHome:BaseFragment()
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        super.onCreateView(inflater, container, savedInstanceState)
+        (binding as FragmentHomeBinding).lContainer.viewModel=viewModel
+        return  binding.root
     }
 
-    override fun onResume() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        l_menu_rv.mLinearLayoutManager()
+        l_menu_rv.adapter=menuAdapter
+        l_news_recycler.mLinearLayoutManager()
+        l_news_recycler.adapter=newsAdapter
+    }
+    private fun navigate(article: Article)
+    {
+        delay150{
+            mAddFragment(true,activity){FragmentDetails.newInstance(article)}
+        }
+    }
+    override fun onResume()
+    {
         super.onResume()
+        (activity as BaseActivity<*>?)?.toolbarTitle?.postValue(getString(R.string.home))
     }
 }
