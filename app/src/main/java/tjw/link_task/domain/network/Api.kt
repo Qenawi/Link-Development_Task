@@ -9,7 +9,7 @@ interface Api {
     companion object {
         private const val ARTICLE_Page1 = "the-next-web"
         private const val ARTICLE_Page2 = "associated-press"
-        private const val API_KEY = "533af958594143758318137469b41ba9"
+        private const val API_KEY = "fb747e10a79d4648baa03d2873b08c7a"
     }
     @GET("articles/")
     fun articleOne(@Query("source") src:String= ARTICLE_Page1,

@@ -1,8 +1,10 @@
 package tjw.link_task.domain.network
 
 import com.google.gson.JsonElement
+import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
+import retrofit2.Converter
 import tjw.go_plus_meeting.domain.network.Failure
 import tjw.go_plus_meeting.domain.network.setArgs
 import tjw.link_task.domain.base.Either
@@ -16,6 +18,7 @@ fun <T, R> request(
     return try {
         val response = call.execute()
         when (response.isSuccessful) {
+
             false -> Either.Left(errorBodyToFail(response.errorBody().toString()))
             true -> {
                 val mResponseBodyHolder = response.body()
@@ -40,6 +43,7 @@ private fun checkCode(d: JsonElement): Boolean {
         false
     }
 }
+
 
 private fun errorBodyToFail(err: String): Failure {
     return try {
