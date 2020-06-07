@@ -54,9 +54,11 @@ fun  Context?.getDeviceUniqueFootPrint():String=try {
     Settings.Secure.getString(this?.contentResolver, Settings.Secure.ANDROID_ID)
 }catch (e:Exception){ FirebaseInstanceId.getInstance().id}
 */
-
+private var mainToast:Toast?=null
 fun Context?.toast(st:String?)
         =
     this?.let {ctx->
-        Toast.makeText(ctx,st, Toast.LENGTH_SHORT).show()
+        mainToast?.cancel()
+        mainToast=Toast.makeText(ctx,st, Toast.LENGTH_SHORT)
+        mainToast?.show()
     }

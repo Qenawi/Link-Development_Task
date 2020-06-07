@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.view.Gravity
 import tjw.link_task.domain.data.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.core.view.GravityCompat
 import androidx.databinding.BindingAdapter
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -153,14 +156,23 @@ fun TextView.msData(msDate: String?)
     this.text= SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH).format(date.toLong())
 }
 @BindingAdapter("go_back", "title", requireAll = false)
-fun View.handle(data: MutableLiveData<Boolean>?, name: MutableLiveData<String>?) {
+fun View.handle(data: MutableLiveData<Boolean>?, name: MutableLiveData<String>?)
+{
     when (name?.value) {
         getString_(R.string.home) -> this.cVisible(false)
         else -> this.cVisible(true)
     }
     this.setOnClickListener { data?.postValue(true) }
 }
-
+@BindingAdapter( "menue_action","menue_title",requireAll = true)
+fun View.handleMenue(data: MutableLiveData<Boolean>?,name: MutableLiveData<String>?)
+{
+    when (name?.value) {
+        getString_(R.string.home) -> this.cVisible(true)
+        else -> this.cVisible(false)
+    }
+    this.setOnClickListener { data?.postValue(true) }
+}
 
 @BindingAdapter("search_", "title_", requireAll = false)
 fun View.handle_search(data: MutableLiveData<Boolean>?, name: MutableLiveData<String>?) {
@@ -202,6 +214,18 @@ fun View.menuSelection(res:MenuItem?,navigation: Navigation?)=cVisible(navigatio
 
 fun RecyclerView.mLinearLayoutManager() {
     this.layoutManager = LinearLayoutManager(this.context)
+}
+
+@BindingAdapter("controle_drawer")
+fun DrawerLayout.handle(navigation: NavState?)
+{
+ when(navigation)
+ {
+     NavState.Closed  -> if (isDrawerOpen(GravityCompat.START)) closeDrawer(GravityCompat.START) else openDrawer(GravityCompat.START)
+     NavState.OPENED -> if (!isDrawerOpen(GravityCompat.START))  openDrawer(GravityCompat.START) else closeDrawer(GravityCompat.START)
+     null,NavState.NONE ->{}
+ }
+
 }
 
 

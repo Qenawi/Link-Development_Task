@@ -7,8 +7,17 @@ import tjw.link_task.R
 const val Auther_Before_ID= R.string.auther_by
 
 enum class MeetingPriority{High,Middle,Low}
+enum class NavState{Closed,OPENED,NONE}
 enum class RecyclerViewStatus { Loading, NetWorkFailure, ResponseFail, EmptyResponse ,Success,UnknownFail }
 enum class Navigation { Explore, LiveChat, Gallary,WishList,Magazine,NONE}
+
+
+fun NavState?.revert()=
+when(this){
+    NavState.Closed -> NavState.OPENED
+    NavState.OPENED , null -> NavState.Closed
+    else -> NavState.NONE
+}
 
 
 fun String?.toMeetingPriority():MeetingPriority?

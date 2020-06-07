@@ -20,6 +20,7 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     private val fragHolderId = R.id.l_fragment_holder
     val toolbarTitle = MutableLiveData<String>()
     val callBack = MutableLiveData<Boolean>()
+    val navState= MutableLiveData<Boolean>().apply{this.value=false}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId())

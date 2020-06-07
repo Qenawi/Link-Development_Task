@@ -4,9 +4,11 @@ jQuery(document).ready(function( $ ) {
     $(".navbar-collapse.collapse").removeClass('in');
   });
   
+  $("#btnSubmit").click(function(){
+    alert("button");
+}); 
+
+
 });
 
-function myFunction() {
-  alert("dd")
-}
 

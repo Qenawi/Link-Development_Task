@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import tjw.go_plus_meeting.domain.network.Failure
 import tjw.link_task.domain.base.BaseViewModel
 import tjw.link_task.domain.data.Article
+import tjw.link_task.extentions.NavState
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor (app: Application, val useCase: HomeUseCase) :
     BaseViewModel<HomeUseCase>(app, useCase) {
      val mLoading = MutableLiveData<Boolean>()
-    val mResult = MutableLiveData<ArrayList<Article>>()
+     val mResult = MutableLiveData<ArrayList<Article>>()
+     val mNavState=MutableLiveData<NavState>()
     fun doWork() {
         mLoading.value = true
         useCase.doWork(HomeUseCase.Params()){art->
