@@ -160,6 +160,19 @@ fun View.handle(data: MutableLiveData<Boolean>?, name: MutableLiveData<String>?)
     }
     this.setOnClickListener { data?.postValue(true) }
 }
+
+
+@BindingAdapter("search_", "title_", requireAll = false)
+fun View.handle_search(data: MutableLiveData<Boolean>?, name: MutableLiveData<String>?) {
+    when (name?.value) {
+        getString_(R.string.home) -> this.cVisible(false)
+        else -> this.cVisible(true)
+    }
+    this.setOnClickListener { data?.postValue(true) }
+}
+
+
+
 fun View.getString_(resource_id: Int): String = try {
     this.context.getString(resource_id)
 } catch (e: Exception) {
@@ -183,8 +196,8 @@ when(this)
  is ImageView->this.setImageDrawable(this.getImg_(id))
 }
 }}
-@BindingAdapter("menu_selection")
-fun View.menuSelection(res:MenuItem?)=cVisible(res?.selected)
+@BindingAdapter("menu_selection","selection",requireAll = true)
+fun View.menuSelection(res:MenuItem?,navigation: Navigation?)=cVisible(navigation?.equals(res?.type))
 
 
 fun RecyclerView.mLinearLayoutManager() {

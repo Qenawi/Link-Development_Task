@@ -17,5 +17,6 @@ class Splash:AppCompatActivity (){
     }
    private fun navigate(){
        mLaunchActivity<MainActivity>(contex = this)
+       finish()
    }
 }

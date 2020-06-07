@@ -23,7 +23,7 @@
         <FrameLayout
             android:id="@+id/l_fragment_holder"
             android:layout_width="0dp"
-            android:background="@color/Gray"
+            android:background="@color/WhiteSmoke"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

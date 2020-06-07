@@ -8,7 +8,7 @@ const val Auther_Before_ID= R.string.auther_by
 
 enum class MeetingPriority{High,Middle,Low}
 enum class RecyclerViewStatus { Loading, NetWorkFailure, ResponseFail, EmptyResponse ,Success,UnknownFail }
-enum class Navigation { HomeMap, Notification, Profile }
+enum class Navigation { Explore, LiveChat, Gallary,WishList,Magazine,NONE}
 
 
 fun String?.toMeetingPriority():MeetingPriority?

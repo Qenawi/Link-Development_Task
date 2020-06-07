@@ -6,6 +6,9 @@
         <variable
             name="data"
             type="tjw.link_task.domain.data.MenuItem" />
+        <variable
+            name="selection"
+            type="androidx.lifecycle.MutableLiveData&lt;tjw.link_task.extentions.Navigation&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -55,14 +58,16 @@
             android:layout_width="5dp"
             android:layout_height="0dp"
             android:alpha="0.7"
+            android:layout_marginStart="8dp"
             android:background="@color/Black"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
+            app:selection="@{selection}"
             app:menu_selection="@{data}">
 
         </FrameLayout>

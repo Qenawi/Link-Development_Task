@@ -16,6 +16,6 @@ class MainActivity: BaseActivity<ActivityWithToolBarBinding>() {
         super.onCreate(savedInstanceState)
         binding.appToolBar.callback = callBack
         binding.appToolBar.title = toolbarTitle
-        addFragment(fragment())
+        addFragment(fragment(),true)
     }
 }

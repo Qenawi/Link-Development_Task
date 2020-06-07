@@ -63,7 +63,7 @@ class FragmentHome:BaseFragment()
     private fun navigate(article: Article)
     {
         delay150{
-            mAddFragment(true,activity){FragmentDetails.newInstance(article)}
+            mAddFragment(addToBackStack = true,activity= activity){FragmentDetails.newInstance(article)}
         }
     }
     override fun onResume()

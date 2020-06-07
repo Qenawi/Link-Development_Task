@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="tjw.link_task.extentions.AppEnumsKt"/>
      <variable
          name="data"
          type="tjw.link_task.domain.data.Article" />
@@ -16,7 +17,9 @@
             android:id="@+id/textView"
             style="@style/bold"
             android:layout_width="0dp"
+            android:textSize="16sp"
             android:layout_height="wrap_content"
+            android:textColor="@color/blackTextColor"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="30dp"
@@ -47,10 +50,13 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView2"
+            android:textSize="14sp"
+            style="@style/bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
+            android:textColor="@color/ForestGreen"
             android:layout_marginEnd="30dp"
             app:before_text="@{AppEnumsKt.Auther_Before_ID}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -99,8 +105,12 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView7"
             android:layout_width="0dp"
+            android:textSize="14sp"
+            android:textColor="@color/Gray"
+            style="@style/bold"
             android:layout_height="0dp"
             android:layout_marginStart="30dp"
+            app:safe_text="@{data.description}"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="8dp"

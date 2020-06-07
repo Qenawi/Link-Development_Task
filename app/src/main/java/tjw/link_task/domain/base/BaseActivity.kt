@@ -38,7 +38,7 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     private fun addFragmentHelperWithBackStack(fragment: Fragment) = supportFragmentManager.inTransaction {
         replace(
             fragHolderId, fragment
-        )
+        ).addToBackStack(fragment::class.simpleName)
     }
     private fun addFragmentHelper(fragment: Fragment) = supportFragmentManager.inTransaction {
         replace(

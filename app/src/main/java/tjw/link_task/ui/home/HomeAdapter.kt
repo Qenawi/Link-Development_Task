@@ -41,6 +41,7 @@ class HomeAdapter(private var adapterData: ArrayList<Article>,val callback: (Art
 
     fun update(data: ArrayList<Article>) {
         /*
+        out of no where lag issue
         print("After ${adapterData.size}")
         autoNotify(adapterData, data, ::campare)
         print("Before ${adapterData.size}")
@@ -52,7 +53,6 @@ class HomeAdapter(private var adapterData: ArrayList<Article>,val callback: (Art
 
     private fun campare(article: Article, article1: Article): Boolean
     {
-        article
         return article.url.equals(article1.url)
     }
     //todo Searhc Bu name and date
